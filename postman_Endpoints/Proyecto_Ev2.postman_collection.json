@@ -1,0 +1,93 @@
+{
+	"info": {
+		"_postman_id": "ead58322-9dea-4e86-bfe6-5b9a61467a67",
+		"name": "Proyecto_Ev2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22122408"
+	},
+	"item": [
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Crear usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Esteban\",\r\n    \"password\": \"MiPass01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/crear_usuario",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"crear_usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inicio de Sesión",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/inicio_sesion",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"inicio_sesion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Esteban\",\r\n    \"password\": \"MiPass01\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/eliminar_usuario",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"eliminar_usuario"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
