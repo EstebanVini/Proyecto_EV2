@@ -27,9 +27,9 @@ async def inicio_sesion(usuario: dict):
     else:
         return {"message": "No se ha podido iniciar sesión", "estado": False}
 
-@app.delete("/eliminar_usuario/{username}")
-async def eliminar_usuario_db(username: str):
-    if eliminar_usuario(username):
+@app.delete("/eliminar_usuario")
+async def eliminar_usuario_db(usuario: dict):
+    if eliminar_usuario(usuario):
         return {"message": "Se ha eliminado el usuario exitosamente"}
     else:
         return {"message": "No se ha podido eliminar el usuario"}

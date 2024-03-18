@@ -4,7 +4,7 @@ import datetime
 import json
 import random
 import bcrypt
-from databaseConn import badabaseConn
+from app.backend.databaseConn import badabaseConn
 
 #____________________________________________Usuarios_______________________________________________________
 
@@ -135,6 +135,3 @@ def eliminar_usuario(username: str):
     conn.close()
 
     return True
-
-
-print(login({'username': 'admin', 'password': 'password'}))
