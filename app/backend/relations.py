@@ -57,3 +57,18 @@ def crear_relacion(relation: Relation):
     # cerrar la conexión a la base de datos
     conn.close()
     return True
+
+def borrar_relacion(relation: Relation):
+    # crear una conexión a la base de datos
+    conn, cursor = badabaseConn()
+
+    # ejecutar la consulta SQL para borrar la relación
+    try:
+        cursor.execute('DELETE FROM relations WHERE user1 = ? AND user2 = ?', (relation.user1, relation.user2))
+        conn.commit()
+    except:
+        return False
+    
+    # cerrar la conexión a la base de datos
+    conn.close()
+    return True
