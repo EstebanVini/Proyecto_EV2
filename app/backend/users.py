@@ -2,8 +2,6 @@ import bcrypt
 from app.database.databaseConn import badabaseConn
 from app.models.models import User, UserInDB
 
-#____________________________________________Usuarios_______________________________________________________
-
 def obtener_usuario_por_username(username: str):
     # crear una conexión a la base de datos
     conn, cursor = badabaseConn()
@@ -15,9 +13,8 @@ def obtener_usuario_por_username(username: str):
         # si se encontró el usuario, retornar verdadero y si no se encontró, retornar falso
         # cerrar la conexión a la base de datos
         conn.close()
-        user = UserInDB(username=usuario[1], email=usuario[2], password=usuario[3], salt=usuario[4], admin=usuario[5])
+        user = UserInDB(id=usuario[0], username=usuario[1], email=usuario[2], password=usuario[3], salt=usuario[4], relatedto=usuario[5], admin=usuario[6])
         return user
-
     except:
         return False
 

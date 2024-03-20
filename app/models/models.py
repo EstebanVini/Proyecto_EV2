@@ -9,6 +9,7 @@ class User(BaseModel):
 
 class UserInDB(User):
     password: str
+    id: Optional[int] = None
     email: Optional[str] = None
     salt: Optional[str] = None
     relatedto: Optional[str] = None
@@ -27,3 +28,14 @@ class TokenData(BaseModel):
 class Relation(BaseModel):
     user1: Optional[str] = None
     user2: str
+
+#_______________________________MESSAGE____________________________________
+class Message(BaseModel):
+    message: str
+    
+class MessageInDB(Message):
+    id: int
+    userID: int
+    sender: str
+    receiver: str
+    date: str
