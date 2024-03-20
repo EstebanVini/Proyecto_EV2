@@ -1,41 +1,11 @@
-import sqlite3
-import datetime
-import json
-import uvicorn
+# main.py
 from fastapi import FastAPI
-from fastapi.responses import FileResponse
-from app.backend.users import crear_usuaio, login, eliminar_usuario
+from app.routes.authRoute import routerAuth
+
 app = FastAPI()
 
-@app.get("/")
-async def root():
-    return {"message": "Running"}
-
-#____________________________________________Usuarios_______________________________________________________
-
-@app.post("/crear_usuario")
-async def guardar_usuario(usuario: dict):
-    if crear_usuaio(usuario):
-        return {"message": "Se ha creado el usuario exitosamente", "estado": True}
-    else:
-        return {"message": "No se ha podido crear el usuario", "estado": False}
-
-@app.post("/inicio_sesion")
-async def inicio_sesion(usuario: dict):
-    if login(usuario):
-        return {"message": "Inicio de sesión exitoso", "estado": True}
-    else:
-        return {"message": "No se ha podido iniciar sesión", "estado": False}
-
-@app.delete("/eliminar_usuario")
-async def eliminar_usuario_db(usuario: dict):
-    if eliminar_usuario(usuario):
-        return {"message": "Se ha eliminado el usuario exitosamente"}
-    else:
-        return {"message": "No se ha podido eliminar el usuario"}
-
+app.include_router(routerAuth)
 
 if __name__ == "__main__":
-
-
-    uvicorn.run(app, host="0.0.0.0", port=8081)
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
