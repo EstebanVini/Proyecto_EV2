@@ -11,6 +11,7 @@ class UserInDB(User):
     password: str
     email: Optional[str] = None
     salt: Optional[str] = None
+    relatedto: Optional[str] = None
     admin: Optional[bool] = False
 
 #_______________________________TOKEN____________________________________

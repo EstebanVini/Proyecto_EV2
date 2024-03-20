@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Esteban\",\r\n    \"password\": \"MiPass01\"\r\n}",
+							"raw": "{\r\n    \"username\": \"Esteban\",\r\n    \"email\": \"estvini26@gmail.com\",\r\n    \"password\": \"MiPass01\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,12 +24,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/crear_usuario",
+							"raw": "{{host}}/register/",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"crear_usuario"
+								"register",
+								""
 							]
 						}
 					},
@@ -42,7 +43,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"password\"\r\n}",
+							"raw": "{\r\n    \"username\": \"Esteban\",\r\n    \"password\": \"MiPass01\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -50,12 +51,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/inicio_sesion",
+							"raw": "{{host}}/token/",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"inicio_sesion"
+								"token",
+								""
 							]
 						}
 					},
@@ -86,8 +88,180 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Prueba auth",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/users/me/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"me",
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			]
+		},
+		{
+			"name": "Relations",
+			"item": [
+				{
+					"name": "Crear Relacion",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "Bearer eyJhbGciOinvG8eIPGuosO47oEpQ",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "/create_relation/",
+							"path": [
+								"create_relation",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Relacion",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user2\": \"Esteban02\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/delete_relation/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"delete_relation",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener mis relaciones",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/relations/me/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"relations",
+								"me",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener relaciones user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/relations/Esteban01",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"relations",
+								"Esteban01"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
 		}
 	]
 }

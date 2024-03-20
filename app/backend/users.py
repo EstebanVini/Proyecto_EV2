@@ -21,9 +21,6 @@ def obtener_usuario_por_username(username: str):
     except:
         return False
 
-
-
-    
 def hash_password(password, salt=None):
     pwd_bytes = password.encode("utf-8")
     if salt is None:

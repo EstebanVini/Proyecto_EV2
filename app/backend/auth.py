@@ -1,12 +1,16 @@
+import os
+from dotenv import load_dotenv
 from fastapi import Depends, HTTPException
 from jose import JWTError, jwt
 from fastapi import HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from app.models.models import TokenData
 
+load_dotenv("dev.env")
+
 # Configuraciones de autenticación
-SECRET_KEY = "your_secret_key_here"
-ALGORITHM = "HS256"
+SECRET_KEY = os.getenv("SECRET_KEY")
+ALGORITHM = os.getenv("ALGORITHM")
 ACCESS_TOKEN_EXPIRE_MINUTES = None  # No hay caducidad
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")

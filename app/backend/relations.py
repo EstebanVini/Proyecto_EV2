@@ -3,45 +3,22 @@ from app.models.models import Relation
 from app.backend.users import obtener_usuario_por_username
 from fastapi import HTTPException
 
-def obtener_relaciones_por_username(username: str):
+def crear_relacion(relation: Relation):
     # crear una conexión a la base de datos
     conn, cursor = badabaseConn()
 
-    # ejecutar la consulta SQL para obtener el usuario por username
+    # revisar si el usuario 2 existe
     try:
-        cursor.execute('SELECT * FROM relations WHERE user1 = ? OR user2 = ?', (username, username))
-
+        cursor.execute('SELECT * FROM users WHERE username = ?', (relation.user2,))
+        usuario = cursor.fetchone()
+        if not usuario:
+            raise HTTPException(status_code=400, detail="User 2 does not exist")
     except:
         return False
-
-    relaciones = cursor.fetchall()
-
-    # cerrar la conexión a la base de datos
-    conn.close()
-
-    # si se encontró el usuario, retornar verdadero y si no se encontró, retornar falso
-    if relaciones:
-        return [Relation(id=relacion[0], user1=relacion[1], user2=relacion[2]) for relacion in relaciones]
     
-    else:
-        return False
-    
-def crear_relacion(relation: Relation):
-    if relation.user1 == relation.user2:
-        return False
-    # crear una conexión a la base de datos
-    conn, cursor = badabaseConn()
-
-    # Verificar si los usuarios existen
-    if not obtener_usuario_por_username(relation.user1) or not obtener_usuario_por_username(relation.user2):
-        return False
-    
-    # verificar si la relación ya existe en ese orden o en el orden inverso
+    # revisar si la relación ya existe
     try:
-        cursor.execute('SELECT * FROM relations WHERE user1 = ? AND user2 = ?', (relation.user1, relation.user2))
-        if cursor.fetchone():
-            raise HTTPException(status_code=400, detail="Relation already exists")
-        cursor.execute('SELECT * FROM relations WHERE user1 = ? AND user2 = ?', (relation.user2, relation.user1))
+        cursor.execute('SELECT * FROM users WHERE relatedto = ? or relatedto = ?', (relation.user1, relation.user2))
         if cursor.fetchone():
             raise HTTPException(status_code=400, detail="Relation already exists")
     except:
@@ -49,26 +26,43 @@ def crear_relacion(relation: Relation):
     
     # ejecutar la consulta SQL para crear la relación
     try:
-        cursor.execute('INSERT INTO relations (user1, user2) VALUES (?, ?)', (relation.user1, relation.user2))
+        # ejecutar la consulta SQL para crear la relación
+        cursor.execute('UPDATE users SET relatedto = ? WHERE username = ?', (relation.user2, relation.user1))
+        cursor.execute('UPDATE users SET relatedto = ? WHERE username = ?', (relation.user1, relation.user2))
         conn.commit()
+        conn.close()
+        return True
     except:
         return False
     
-    # cerrar la conexión a la base de datos
-    conn.close()
-    return True
+def obtener_relaciones_por_username(username: str):
+    # crear una conexión a la base de datos
+    conn, cursor = badabaseConn()
 
+    # ejecutar la consulta SQL para obtener las relaciones por username
+    try:
+        cursor.execute('SELECT * FROM users WHERE username = ? and relatedto is not null', (username,))
+        relaciones = cursor.fetchall()
+        # si se encontraron relaciones, retornarlas
+        # cerrar la conexión a la base de datos
+        conn.close()
+        return Relation(user1=relaciones[0][1], user2=relaciones[0][5])
+    except:
+        return False
+    
 def borrar_relacion(relation: Relation):
     # crear una conexión a la base de datos
     conn, cursor = badabaseConn()
 
     # ejecutar la consulta SQL para borrar la relación
     try:
-        cursor.execute('DELETE FROM relations WHERE user1 = ? AND user2 = ?', (relation.user1, relation.user2))
+        cursor.execute('UPDATE users SET relatedto = NULL WHERE username = ? and relatedto = ?', (relation.user1, relation.user2))
+        cursor.execute('UPDATE users SET relatedto = NULL WHERE username = ? and relatedto = ?', (relation.user2, relation.user1))
         conn.commit()
+        conn.close()
+        return True
     except:
         return False
     
-    # cerrar la conexión a la base de datos
-    conn.close()
-    return True
+    
+    
