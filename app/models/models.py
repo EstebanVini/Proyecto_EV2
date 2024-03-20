@@ -6,10 +6,10 @@ from typing import Optional
 #_______________________________USER____________________________________
 class User(BaseModel):
     username: str
-    email: Optional[str] = None
 
 class UserInDB(User):
     password: str
+    email: Optional[str] = None
     salt: Optional[str] = None
     admin: Optional[bool] = False
 

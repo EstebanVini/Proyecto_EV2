@@ -1,9 +1,7 @@
 # routers.py
 from fastapi import APIRouter, Depends, HTTPException
-from fastapi.security import OAuth2PasswordRequestForm
-from app.backend.auth import *
+from app.backend.auth import create_access_token, get_current_user
 from app.backend.users import register_userDB, loginDB
-from app.database.databaseConn import badabaseConn
 from app.models.models import User, UserInDB, Token
 
 routerAuth = APIRouter()
@@ -11,10 +9,12 @@ routerAuth = APIRouter()
 @routerAuth.post("/register/")
 def register_user(user: UserInDB):
     try:
-        register_userDB(user)
-        return {"status": "success", "message": "User created"}
+        if register_userDB(user):
+            return {"status": "success", "message": "User created"}
+        else:
+            raise HTTPException(status_code=400, detail="User already exists")
     except:
-        raise HTTPException(status_code=400, detail="Error creating user")    
+        raise HTTPException(status_code=400, detail="User already exists")    
     
 
 @routerAuth.post("/token/", response_model=Token)
@@ -25,12 +25,6 @@ def login(user: UserInDB):
     access_token = create_access_token(data={"sub": user.username})
     return {"access_token": access_token, "token_type": "bearer"}
 
-# @routerAuth.post("/logout/")
-# def logout(request: Request, current_user: User = Depends(get_current_user)):
-#     token = request.headers.get('Authorization')
-#     if token:
-#         revoked_tokens.add(token)
-#     return JSONResponse(content={"message": "Logout successful"})
 
 @routerAuth.get("/users/me/", response_model=User)
 def read_users_me(current_user: User = Depends(get_current_user)):

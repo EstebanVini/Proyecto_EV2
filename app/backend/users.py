@@ -1,11 +1,6 @@
-import sqlite3
-import time
-import datetime
-import json
-import random
 import bcrypt
 from app.database.databaseConn import badabaseConn
-from app.models.models import User, UserInDB, Token
+from app.models.models import User, UserInDB
 
 #____________________________________________Usuarios_______________________________________________________
 
