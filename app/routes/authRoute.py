@@ -16,7 +16,6 @@ def register_user(user: UserInDB):
     except:
         raise HTTPException(status_code=400, detail="User already exists")    
     
-
 @routerAuth.post("/token/", response_model=Token)
 def login(user: UserInDB):
     user = loginDB(user)

@@ -21,3 +21,8 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     username: str | None = None
+
+#_______________________________RELATION____________________________________
+class Relation(BaseModel):
+    user1: Optional[str] = None
+    user2: str

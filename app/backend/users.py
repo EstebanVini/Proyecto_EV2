@@ -11,22 +11,18 @@ def obtener_usuario_por_username(username: str):
     # ejecutar la consulta SQL para obtener el usuario por username
     try:
         cursor.execute('SELECT * FROM users WHERE username = ?', (username,))
+        usuario = cursor.fetchone()
+        # si se encontró el usuario, retornar verdadero y si no se encontró, retornar falso
+        # cerrar la conexión a la base de datos
+        conn.close()
+        user = UserInDB(username=usuario[1], email=usuario[2], password=usuario[3], salt=usuario[4], admin=usuario[5])
+        return user
 
     except:
         return False
 
-    usuario = cursor.fetchone()
 
-    # cerrar la conexión a la base de datos
-    conn.close()
 
-    # si se encontró el usuario, retornar verdadero y si no se encontró, retornar falso
-    user = UserInDB(username=usuario[1], email=usuario[2], password=usuario[3], salt=usuario[4], admin=usuario[5])
-    if usuario:
-        return user
-    
-    else:
-        return False
     
 def hash_password(password, salt=None):
     pwd_bytes = password.encode("utf-8")
