@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Usuarios",
+			"name": "Users",
 			"item": [
 				{
 					"name": "Crear usuario",
@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Esteban\",\r\n    \"email\": \"estvini26@gmail.com\",\r\n    \"password\": \"MiPass01\"\r\n}",
+							"raw": "{\r\n    \"username\": \"Elmo Llete\",\r\n    \"email\": \"elmollete26@gmail.com\",\r\n    \"password\": \"MiPass01\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -43,7 +43,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Esteban\",\r\n    \"password\": \"MiPass01\"\r\n}",
+							"raw": "{\r\n    \"username\": \"Esteban02\",\r\n    \"email\": \"elmollete26@gmail.com\",\r\n    \"password\": \"MiPass01\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -125,18 +125,25 @@
 						"method": "POST",
 						"header": [
 							{
-								"key": "",
-								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJFc3RlYmFuIn0.PykKEONPC2mOko5LaOTDnmCJ2nvG8eIPGuosO47oEpQ",
-								"type": "text"
-							},
-							{
 								"key": "Authorization",
-								"value": "",
+								"value": "Bearer {{token}}",
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user2\": \"Esteban02\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "/create_relation/",
+							"raw": "{{host}}/create_relation/",
+							"host": [
+								"{{host}}"
+							],
 							"path": [
 								"create_relation",
 								""
@@ -331,12 +338,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/messages/Esteban",
+							"raw": "{{host}}/messages/user/Esteban",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"messages",
+								"user",
 								"Esteban"
 							]
 						}
@@ -370,13 +378,54 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/messages/Esteban",
+							"raw": "{{host}}/messages/recieved/",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"messages",
-								"Esteban"
+								"recieved",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mensaje recibido Random",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"message\": \"hola\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/messages/random/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"messages",
+								"random",
+								""
 							]
 						}
 					},
@@ -401,6 +450,454 @@
 							"path": [
 								"delete_message",
 								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movies",
+			"item": [
+				{
+					"name": "Buscar Pelicula",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Star Wars\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/search_movie/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"search_movie",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Todas",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/movies/all",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Todas Películas",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/movies/all/movies/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"all",
+								"movies",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Todas Series",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/movies/all/tvseries/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"all",
+								"tvseries",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener todo Por género",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"genre\": \"Accion\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/all/by_genre/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"all",
+								"by_genre",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener random",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/movies/random/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"random",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Serie random",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/movies/random/tvseries/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"random",
+								"tvseries",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Película random",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/movies/random/movies/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"random",
+								"movies",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener random Por ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"genre\": \"Accion\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/byID/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"byID",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Por título",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Star\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/byTitle/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"byTitle",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener random Por género",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"genre\": \"Accion\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/random/by_genre/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"random",
+								"by_genre",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener random Por género y tipo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"genre\": \"Accion\",\r\n    \"type\": \"movie\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/random/by_genre_and_type/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"random",
+								"by_genre_and_type",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Guardar Película",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Star Wars: The Bad Batch\",\r\n    \"release\": \"2021–2024\",\r\n    \"type\": \"tvSeries\",\r\n    \"genre\": \"Accion\",\r\n    \"imageurl\": \"https://m.media-amazon.com/images/M/MV5BZWU5Mjg5ZDctOWZmMi00ZjQ4LTkzYzYtY2FkY2E4YWIxMGNkXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/save_movie/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"save_movie",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Guardar Película Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Star Wars: The Bad Batch\",\r\n    \"release\": \"2021–2024\",\r\n    \"type\": \"tvSeries\",\r\n    \"genre\": \"Accion\",\r\n    \"imageurl\": \"https://m.media-amazon.com/images/M/MV5BZWU5Mjg5ZDctOWZmMi00ZjQ4LTkzYzYtY2FkY2E4YWIxMGNkXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/delete_movie/3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"delete_movie",
+								"3"
 							]
 						}
 					},
@@ -439,7 +936,7 @@
 		},
 		{
 			"key": "token",
-			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJFc3RlYmFuIn0.8qbmRF_LYIkQ0ezYOxh8wHNqNT8G4ekSqsFXXXxrYAw",
+			"value": "",
 			"type": "string"
 		}
 	]

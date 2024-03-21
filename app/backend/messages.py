@@ -78,7 +78,22 @@ def obtener_mensajes_por_ID(userID: int):
         return [MessageInDB(id=mensaje[0], userID=mensaje[1], sender=mensaje[2], receiver=mensaje[3], message=mensaje[4], date=mensaje[5]) for mensaje in mensajes]
     except:
         return False
-    
+
+def obtener_mensaje_recibido_aleatorio(username: str):
+    # crear la conexion con la base de datos
+    conn, cursor = badabaseConn()
+
+    # ejecutar la consulta SQL para obtener los mensajes por username
+    try:
+        cursor.execute('SELECT * FROM messages WHERE receiver = ? ORDER BY RANDOM() LIMIT 1', (username,))
+        mensaje = cursor.fetchone()
+        # si se encontraron mensajes, retornarlos
+        # cerrar la conexion con la base de datos
+        conn.close()
+        return MessageInDB(id=mensaje[0], userID=mensaje[1], sender=mensaje[2], receiver=mensaje[3], message=mensaje[4], date=mensaje[5])
+    except:
+        return False
+
 def borrar_mensaje(id: int):
     # crear la conexion con la base de datos
     conn, cursor = badabaseConn()

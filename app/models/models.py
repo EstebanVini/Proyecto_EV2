@@ -44,16 +44,15 @@ class MessageInDB(Message):
 #_______________________________Movie____________________________________
 
 class Movie(BaseModel):
-    id: Optional[str] = None
-    titleNameText: Optional[str] = None
-    titleReleaseText: Optional[str] = None
-    titleTypeText: Optional[str] = None
-    titlePosterImageModel: Optional[str] = None
-    topCredits: List[Optional[str]] = None
-    imageType: Optional[str] = None
+    id: Optional[int] = None
+    title: Optional[str] = None
+    release: Optional[str] = None
+    type: Optional[str] = None
+    genre: Optional[str] = None
+    imageurl: Optional[str] = None
 
-class TitlePosterImageModel(BaseModel):
-    url: Optional[str] = None
-    maxHeight: Optional[str] = None
-    maxWidth: Optional[str] = None
-    caption: Optional[str] = None
+class MovieInDB(Movie):
+    user1: Optional[str] = None
+    user2: Optional[str] = None
+
+

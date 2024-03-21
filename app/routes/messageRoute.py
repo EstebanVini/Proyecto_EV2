@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from app.backend.auth import get_current_user
 from app.models.models import User, Message
-from app.backend.messages import enviar_mensaje, obtener_mensajes_por_username, obtener_mensajes_recibidos, borrar_mensaje
+from app.backend.messages import enviar_mensaje, obtener_mensajes_por_username, obtener_mensajes_recibidos, borrar_mensaje, obtener_mensaje_recibido_aleatorio
 
 routerMessage = APIRouter()
 
@@ -48,7 +48,18 @@ def read_messages_recieved(current_user: User = Depends(get_current_user)):
             raise HTTPException(status_code=400, detail="No messages found")
     except:
         raise HTTPException(status_code=400, detail="Error reading messages")
-    
+
+@routerMessage.get("/messages/random/")
+def read_messages_random(current_user: User = Depends(get_current_user)):
+    try:
+        mensajes = obtener_mensaje_recibido_aleatorio(current_user.username)
+        if mensajes:
+            return mensajes
+        else:
+            raise HTTPException(status_code=400, detail="No messages found")
+    except:
+        raise HTTPException(status_code=400, detail="Error reading messages")
+
 @routerMessage.delete("/delete_message/{id}/")
 def delete_message(id: int, current_user: User = Depends(get_current_user)):
     try:
