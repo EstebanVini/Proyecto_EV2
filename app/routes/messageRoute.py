@@ -26,7 +26,7 @@ def read_messages_me(current_user: User = Depends(get_current_user)):
     except:
         raise HTTPException(status_code=400, detail="Error reading messages")
     
-@routerMessage.get("/messages/{username}/")
+@routerMessage.get("/messages/user/{username}/")
 def read_messages(username: str, current_user: User = Depends(get_current_user)):
     try:
         mensajes = obtener_mensajes_por_username(username)
@@ -39,8 +39,9 @@ def read_messages(username: str, current_user: User = Depends(get_current_user))
     
 @routerMessage.get("/messages/recieved/")
 def read_messages_recieved(current_user: User = Depends(get_current_user)):
+    print(current_user.username)
     try:
-        mensajes = obtener_mensajes_recibidos(current_user)
+        mensajes = obtener_mensajes_recibidos(current_user.username)
         if mensajes:
             return mensajes
         else:

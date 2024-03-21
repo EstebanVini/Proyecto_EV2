@@ -21,3 +21,4 @@ CREATE TABLE "messages" (
 	FOREIGN KEY("userID") REFERENCES "users"
 );
 
+INSERT INTO "messages" ("userID", "sender", "receiver", "message", "date") VALUES (2, "Esteban02", "Esteban", "Hello, how are you?", "2022-01-01");

@@ -40,7 +40,7 @@ def obtener_mensajes_por_username(username: str):
 
     # ejecutar la consulta SQL para obtener los mensajes por username
     try:
-        cursor.execute('SELECT * FROM messages WHERE receiver = ?', (username,))
+        cursor.execute('SELECT * FROM messages WHERE sender = ?', (username,))
         mensajes = cursor.fetchall()
         # si se encontraron mensajes, retornarlos
         # cerrar la conexion con la base de datos
@@ -92,7 +92,6 @@ def borrar_mensaje(id: int):
     except:
         return False
     
-
     
 
 

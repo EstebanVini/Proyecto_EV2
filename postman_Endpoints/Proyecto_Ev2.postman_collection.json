@@ -126,7 +126,7 @@
 						"header": [
 							{
 								"key": "",
-								"value": "Bearer eyJhbGciOinvG8eIPGuosO47oEpQ",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJFc3RlYmFuIn0.PykKEONPC2mOko5LaOTDnmCJ2nvG8eIPGuosO47oEpQ",
 								"type": "text"
 							},
 							{
@@ -228,6 +228,185 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Messages",
+			"item": [
+				{
+					"name": "Mandar Mensaje",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"message\": \"hola\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/send_message",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"send_message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mensajes mandados",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"message\": \"hola\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/messages/me/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"messages",
+								"me",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mensajes mandados por username",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"message\": \"hola\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/messages/Esteban",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"messages",
+								"Esteban"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mensajes recibidos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"message\": \"hola\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/messages/Esteban",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"messages",
+								"Esteban"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Mensaje",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/delete_message/5",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"delete_message",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -260,7 +439,7 @@
 		},
 		{
 			"key": "token",
-			"value": "",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJFc3RlYmFuIn0.8qbmRF_LYIkQ0ezYOxh8wHNqNT8G4ekSqsFXXXxrYAw",
 			"type": "string"
 		}
 	]
