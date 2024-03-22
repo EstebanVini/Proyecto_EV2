@@ -1,5 +1,5 @@
 FROM python:3.11.8-slim
-WORKDIR /usr/src/app
+WORKDIR /usr/src/application
 COPY app ./app
 COPY data ./data
 COPY requirements.txt .
