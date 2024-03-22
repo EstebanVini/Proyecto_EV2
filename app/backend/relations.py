@@ -9,7 +9,7 @@ def crear_relacion(relation: Relation):
 
     # revisar si el usuario 2 existe
     try:
-        cursor.execute('SELECT * FROM users WHERE username = ?', (relation.user2,))
+        cursor.execute('SELECT * FROM users WHERE username = %s', (relation.user2,))
         usuario = cursor.fetchone()
         if not usuario:
             raise HTTPException(status_code=400, detail="User 2 does not exist")
@@ -18,7 +18,7 @@ def crear_relacion(relation: Relation):
     
     # revisar si la relación ya existe
     try:
-        cursor.execute('SELECT * FROM users WHERE relatedto = ? or relatedto = ?', (relation.user1, relation.user2))
+        cursor.execute('SELECT * FROM users WHERE relatedto = %s or relatedto = %s', (relation.user1, relation.user2))
         if cursor.fetchone():
             raise HTTPException(status_code=400, detail="Relation already exists")
     except:
@@ -27,8 +27,8 @@ def crear_relacion(relation: Relation):
     # ejecutar la consulta SQL para crear la relación
     try:
         # ejecutar la consulta SQL para crear la relación
-        cursor.execute('UPDATE users SET relatedto = ? WHERE username = ?', (relation.user2, relation.user1))
-        cursor.execute('UPDATE users SET relatedto = ? WHERE username = ?', (relation.user1, relation.user2))
+        cursor.execute('UPDATE users SET relatedto = %s WHERE username = %s', (relation.user2, relation.user1))
+        cursor.execute('UPDATE users SET relatedto = %s WHERE username = %s', (relation.user1, relation.user2))
         conn.commit()
         conn.close()
         return True
@@ -41,7 +41,7 @@ def obtener_relaciones_por_username(username: str):
 
     # ejecutar la consulta SQL para obtener las relaciones por username
     try:
-        cursor.execute('SELECT * FROM users WHERE username = ? and relatedto is not null', (username,))
+        cursor.execute('SELECT * FROM users WHERE username = %s and relatedto is not null', (username,))
         relaciones = cursor.fetchall()
         # si se encontraron relaciones, retornarlas
         # cerrar la conexión a la base de datos
@@ -56,8 +56,8 @@ def borrar_relacion(relation: Relation):
 
     # ejecutar la consulta SQL para borrar la relación
     try:
-        cursor.execute('UPDATE users SET relatedto = NULL WHERE username = ? and relatedto = ?', (relation.user1, relation.user2))
-        cursor.execute('UPDATE users SET relatedto = NULL WHERE username = ? and relatedto = ?', (relation.user2, relation.user1))
+        cursor.execute('UPDATE users SET relatedto = NULL WHERE username = %s and relatedto = %s', (relation.user1, relation.user2))
+        cursor.execute('UPDATE users SET relatedto = NULL WHERE username = %s and relatedto = %s', (relation.user2, relation.user1))
         conn.commit()
         conn.close()
         return True

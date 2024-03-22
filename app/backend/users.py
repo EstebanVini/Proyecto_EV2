@@ -8,7 +8,7 @@ def obtener_usuario_por_username(username: str):
 
     # ejecutar la consulta SQL para obtener el usuario por username
     try:
-        cursor.execute('SELECT * FROM users WHERE username = ?', (username,))
+        cursor.execute('SELECT * FROM users WHERE username = %s', (username,))
         usuario = cursor.fetchone()
         # si se encontró el usuario, retornar verdadero y si no se encontró, retornar falso
         # cerrar la conexión a la base de datos
@@ -58,14 +58,16 @@ def register_userDB(user: UserInDB):
     try:
         if obtener_usuario_por_username(user.username):
             return False
-    except:
+    except Exception as e:
+        print(e)
         pass
         
     # insertar un usuario en la tabla con un ID automático
     try:
         # insertar un usuario en la tabla con un ID automático
-        cursor.execute('INSERT INTO users (username, email, password, salt, admin) VALUES (?, ?, ?, ?, ?)', (user.username, user.email, hashed_pwd, salt, 0))
-    except:
+        cursor.execute('INSERT INTO users (username, email, password, salt, admin) VALUES (%s, %s, %s, %s, %s)', (user.username, user.email, hashed_pwd, salt, 0))
+    except Exception as e:
+        print(e)
         return False
 
     # confirmar los cambios y cerrar la conexión a la base de datos

@@ -13,8 +13,9 @@ def register_user(user: UserInDB):
             return {"status": "success", "message": "User created"}
         else:
             raise HTTPException(status_code=400, detail="User already exists")
-    except:
-        raise HTTPException(status_code=400, detail="User already exists")    
+    except Exception as e:
+        print(e)
+        raise HTTPException(status_code=400, detail=f"Error creating user: {e}")    
     
 @routerAuth.post("/token/", response_model=Token)
 def login(user: UserInDB):
