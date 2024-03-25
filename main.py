@@ -1,4 +1,12 @@
 # main.py
+"""
+Este proyecto inició el día 17 de Marzo del 2024. El mismo día del fallecimiento de Laura Ortiz Castillo, mi querida abuela, que en paz descanse. 
+
+Fuste una increíble mujer y la mejor abuela que podría pedir. Te amaré siempre y te extrañaré mucho. Este proyecto va dedicado a ti, con todo mi amor. 
+
+Gracias por todo...
+"""
+
 from fastapi import FastAPI
 from app.routes.authRoute import routerAuth
 from app.routes.relationRoute import routerRelation

@@ -16,6 +16,11 @@ class UserInDB(User):
     relatedto: Optional[str] = None
     admin: Optional[bool] = False
 
+#_______________________________NewPassword____________________________________
+class NewPassword(BaseModel):
+    password: str
+    newpassword: str
+
 #_______________________________TOKEN____________________________________
 
 class Token(BaseModel):

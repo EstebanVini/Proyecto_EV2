@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 load_dotenv("dev.env")
 
 # Datos de conexión
-host = os.getenv("DBHOST")
+host = "192.168.100.33"
 user = os.getenv("DBUSER")
 password = os.getenv("DBPASSWORD")
 database = "proyectoEv2"

@@ -113,6 +113,40 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Cambiar Contraseña",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"MiPass01\",\r\n    \"newpassword\": \"MiPass02\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/change_password/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"change_password",
+								""
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

@@ -1,6 +1,6 @@
 import bcrypt
 from app.database.databaseConn import badabaseConn
-from app.models.models import User, UserInDB
+from app.models.models import User, UserInDB, NewPassword
 
 def obtener_usuario_por_username(username: str):
     # crear una conexión a la base de datos
@@ -73,5 +73,31 @@ def register_userDB(user: UserInDB):
     # confirmar los cambios y cerrar la conexión a la base de datos
     conn.commit()
     conn.close()
+
+    return True
+
+def chage_password_userDB(newPwd: NewPassword, user: UserInDB):
+    # crear una conexión a la base de datos
+    conn, cursor = badabaseConn()
+
+    # Consultar si el usuario ya existe y validar las credenciales
+    try:
+        if not loginDB(UserInDB(username=user.username, password=newPwd.password)):
+            return False
+    except Exception as e:
+        print(e)
+        return False
+    
+    # Actualizar la contraseña del usuario
+    hashed_pwd, salt = hash_password(newPwd.newpassword)
+
+    try:
+        cursor.execute('UPDATE users SET password = %s, salt = %s WHERE username = %s', (hashed_pwd, salt, user.username))
+    except Exception as e:
+        print(e)
+        return False
+    finally:
+        conn.commit()
+        conn.close()
 
     return True
