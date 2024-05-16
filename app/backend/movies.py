@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from app.models.models import Movie, User, UserInDB
 from app.database.databaseConn import badabaseConn 
 from app.backend.users import obtener_usuario_por_username
-
+from googletrans import Translator
 
 def search_movieDB(title):
     load_dotenv("dev.env")
