@@ -6,13 +6,40 @@ from app.database.databaseConn import badabaseConn
 from app.backend.users import obtener_usuario_por_username
 from googletrans import Translator
 
+def translate_to_english(text):
+  """
+  Translates text to English if it's not already in English.
+
+  Args:
+    text (str): The text to be translated.
+
+  Returns:
+    str: The translated text (English).
+  """
+  translator = Translator()
+
+  # Detect the language of the input text
+  detected_lang = translator.detect(text).lang
+
+  # If the language is not English, translate to English
+  if detected_lang != 'en':
+    translation = translator.translate(text, dest='en').text
+    return translation
+  # If the language is English, return the text as-is
+  else:
+    
+    print("Texto en inglés")
+    return text
+  
 def search_movieDB(title):
     load_dotenv("dev.env")
     apikey = os.getenv("MOVIESAPIKEY")
     
     url = "https://imdb146.p.rapidapi.com/v1/find/"
 
-    querystring = {"query": title}
+    translatedTitle = translate_to_english(title)
+
+    querystring = {"query": translatedTitle}
 
     headers = {
         "X-RapidAPI-Key": apikey,
@@ -44,8 +71,6 @@ def guardar_pelicula(movie: Movie, username: str):
         print(f"Error: {str(e)}")
         return False
 
-
-
 def get_all_movies(username: str):
     #crear conexión a la base de datos
     conn, cursor = badabaseConn()
@@ -66,7 +91,6 @@ def get_all_movies(username: str):
         return False
     finally:
         conn.close()
-
 
 def get_tvseries(username: str):
     #crear conexión a la base de datos
@@ -315,5 +339,3 @@ def borrar_pelicula(id):
     finally:
         conn.close()
 
-
-    
