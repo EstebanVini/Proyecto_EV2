@@ -62,6 +62,17 @@ def guardar_pelicula(movie: Movie, username: str):
     except:
         return False
     
+    # Verificar si la película ya existe en la base de datos
+    try:
+        cursor.execute("SELECT * FROM movies WHERE title = %s AND (user1 = %s OR user2 = %s)", (movie.title, user.username, user.relatedto))
+        existing_movie = cursor.fetchone()
+        if existing_movie:
+            print("La película ya se encuentra en la base de datos.")
+            return False
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        return False
+    
     # Ejecutar la consulta SQL para guardar la película
     try:
         cursor.execute("INSERT INTO movies (title, release_date, type, genre, image_url, user1, user2) VALUES (%s, %s, %s, %s, %s, %s, %s)", (movie.title, movie.release, movie.type, movie.genre, movie.imageurl, user.username, user.relatedto))
@@ -339,3 +350,44 @@ def borrar_pelicula(id):
     finally:
         conn.close()
 
+def get_movie_by_type(type: str, username: str):
+    #crear conexión a la base de datos
+    conn, cursor = badabaseConn()
+
+    # obtener datos del usuario
+    try:
+        user = obtener_usuario_por_username(username)
+    except:
+        return False
+    
+    # ejecutar la consulta SQL para obtener la película por tipo
+    try:
+        cursor.execute("SELECT * FROM movies WHERE type = %s AND (user1 = %s OR user2 = %s)", (type, user.username, user.username))
+        movies = cursor.fetchall()
+        return [Movie(id=movie[0], title=movie[1], release=movie[2], type=movie[3],genre=movie[4], imageurl=movie[5]) for movie in movies]
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        return False
+    finally:
+        conn.close()
+
+def get_random_movie_by_type(type: str, username: str):
+    #crear conexión a la base de datos
+    conn, cursor = badabaseConn()
+
+    # obtener datos del usuario
+    try:
+        user = obtener_usuario_por_username(username)
+    except:
+        return False
+    
+    # ejecutar la consulta SQL para obtener una película aleatoria por tipo
+    try:
+        cursor.execute("SELECT * FROM movies WHERE type = %s AND (user1 = %s OR user2 = %s) ORDER BY RAND() LIMIT 1", (type, user.username, user.username))
+        movie = cursor.fetchone()
+        return Movie(id=movie[0], title=movie[1], release=movie[2], type=movie[3],genre=movie[4], imageurl=movie[5])
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        return False
+    finally:
+        conn.close()

@@ -5,6 +5,16 @@ from app.backend.movies import *
 
 routerMovie = APIRouter()
 
+@routerMovie.post("/save_movie/")
+def save_movie(movie: Movie, current_user: User = Depends(get_current_user)):
+    try:
+        if guardar_pelicula(movie, current_user.username):
+            return {"status": "success", "message": "Movie saved"}
+        else:
+            raise HTTPException(status_code=400, detail="Error saving movie")
+    except:
+        raise HTTPException(status_code=400, detail="Error saving movie")
+    
 @routerMovie.get("/search_movie/")
 def search_movie(movie: Movie, current_user: User = Depends(get_current_user)):
     try:
@@ -16,16 +26,6 @@ def search_movie(movie: Movie, current_user: User = Depends(get_current_user)):
     except:
         raise HTTPException(status_code=400, detail="Error searching movie")
     
-@routerMovie.post("/save_movie/")
-def save_movie(movie: Movie, current_user: User = Depends(get_current_user)):
-    try:
-        if guardar_pelicula(movie, current_user.username):
-            return {"status": "success", "message": "Movie saved"}
-        else:
-            raise HTTPException(status_code=400, detail="Error saving movie")
-    except:
-        raise HTTPException(status_code=400, detail="Error saving movie")
-    
 @routerMovie.get("/movies/all")
 def read_movies_me(current_user: User = Depends(get_current_user)):
     try:
@@ -36,17 +36,6 @@ def read_movies_me(current_user: User = Depends(get_current_user)):
             raise HTTPException(status_code=400, detail="No movies found")
     except:
         raise HTTPException(status_code=400, detail="Error reading movies")
-    
-# @routerMovie.get("/movies/{username}/")
-# def read_movies(username: str, current_user: User = Depends(get_current_user)):
-#     try:
-#         movies = get_all_movies(username)
-#         if movies:
-#             return movies
-#         else:
-#             raise HTTPException(status_code=400, detail="No movies found")
-#     except:
-#         raise HTTPException(status_code=400, detail="Error reading movies")
     
 @routerMovie.get("/movies/all/tvseries/")
 def read_tvseries(current_user: User = Depends(get_current_user)):
@@ -159,6 +148,28 @@ def read_movie_byTitle(movie: Movie, current_user: User = Depends(get_current_us
     except:
         raise HTTPException(status_code=400, detail="Error reading movie")
     
+@routerMovie.get("/movies/byType/")
+def read_movie_byType(movie: Movie, current_user: User = Depends(get_current_user)):
+    try:
+        movie = get_movie_by_type(movie.type, current_user.username)
+        if movie:
+            return movie
+        else:
+            raise HTTPException(status_code=400, detail="No movie found")
+    except:
+        raise HTTPException(status_code=400, detail="Error reading movie")
+    
+@routerMovie.get("/movies/random/byType/")
+def read_random_movie_byType(movie: Movie, current_user: User = Depends(get_current_user)):
+    try:
+        movie = get_random_movie_by_type(movie.type, current_user.username)
+        if movie:
+            return movie
+        else:
+            raise HTTPException(status_code=400, detail="No movie found")
+    except:
+        raise HTTPException(status_code=400, detail="Error reading movie")
+
 @routerMovie.put("/update_movie/{id}/")
 def update_movie(id: int, movie: Movie, current_user: User = Depends(get_current_user)):
     try:
@@ -179,6 +190,4 @@ def delete_movie(id: int, current_user: User = Depends(get_current_user)):
     except Exception as e:
         print(e)
         raise HTTPException(status_code=400, detail="Error deleting movie")
-    
-
     
