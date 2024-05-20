@@ -43,7 +43,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Esteban\",\r\n    \"email\": \"elmollete26@gmail.com\",\r\n    \"password\": \"MiPass01\"\r\n}",
+							"raw": "{\r\n    \"username\": \"Esteban\",\r\n    \"email\": \"elmollete26@gmail.com\",\r\n    \"password\": \"MiPass02\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -884,7 +884,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Star Wars: The Bad Batch\",\r\n    \"release\": \"2021–2024\",\r\n    \"type\": \"tvSeries\",\r\n    \"genre\": \"Accion\",\r\n    \"imageurl\": \"https://m.media-amazon.com/images/M/MV5BZWU5Mjg5ZDctOWZmMi00ZjQ4LTkzYzYtY2FkY2E4YWIxMGNkXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg\"\r\n}",
+							"raw": "{\r\n    \"id\": \"5\",\r\n    \"title\": \"Star Wars: The Bad Batch\",\r\n    \"release\": \"2021–2024\",\r\n    \"type\": \"tvSeries\",\r\n    \"genre\": \"Accion\",\r\n    \"imageurl\": \"https://m.media-amazon.com/images/M/MV5BZWU5Mjg5ZDctOWZmMi00ZjQ4LTkzYzYtY2FkY2E4YWIxMGNkXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -917,7 +917,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Star Wars: The Bad Batch\",\r\n    \"release\": \"2021–2024\",\r\n    \"type\": \"tvSeries\",\r\n    \"genre\": \"Accion\",\r\n    \"imageurl\": \"https://m.media-amazon.com/images/M/MV5BZWU5Mjg5ZDctOWZmMi00ZjQ4LTkzYzYtY2FkY2E4YWIxMGNkXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg\"\r\n}",
+							"raw": "{\r\n    \"id\": \"5\",\r\n    \"genre\": \"Ciencia Ficción\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -925,14 +925,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/movies/update/1",
+							"raw": "{{host}}/movies/update",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"movies",
-								"update",
-								"1"
+								"update"
 							]
 						}
 					},
@@ -951,7 +950,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"Star Wars: The Bad Batch\",\r\n    \"release\": \"2021–2024\",\r\n    \"type\": \"tvSeries\",\r\n    \"genre\": \"Accion\",\r\n    \"imageurl\": \"https://m.media-amazon.com/images/M/MV5BZWU5Mjg5ZDctOWZmMi00ZjQ4LTkzYzYtY2FkY2E4YWIxMGNkXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg\"\r\n}",
+							"raw": "{\r\n        \"id\": \"5\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -959,13 +958,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/delete_movie/3",
+							"raw": "{{host}}/delete_movie",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"delete_movie",
-								"3"
+								"delete_movie"
 							]
 						}
 					},
@@ -999,7 +997,7 @@
 	"variable": [
 		{
 			"key": "host",
-			"value": "",
+			"value": "192.168.100.21",
 			"type": "string"
 		},
 		{

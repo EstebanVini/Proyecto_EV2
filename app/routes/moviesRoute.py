@@ -170,20 +170,20 @@ def read_random_movie_byType(movie: Movie, current_user: User = Depends(get_curr
     except:
         raise HTTPException(status_code=400, detail="Error reading movie")
 
-@routerMovie.put("/movies/update/{id}/")
-def update_movie(id: int, movie: Movie, current_user: User = Depends(get_current_user)):
+@routerMovie.put("/movies/update/")
+def update_movie(movie: Movie, current_user: User = Depends(get_current_user)):
     try:
-        if update_movie_db(id, movie, current_user.username):
+        if update_movie_db(movie.id, movie, current_user.username):
             return {"status": "success", "message": "Movie updated"}
         else:
             raise HTTPException(status_code=403, detail="Error updating movie")
     except:
         raise HTTPException(status_code=400, detail="Error updating movie")
     
-@routerMovie.delete("/delete_movie/{id}/")
-def delete_movie(id: int, current_user: User = Depends(get_current_user)):
+@routerMovie.delete("/delete_movie/")
+def delete_movie(movie: Movie, current_user: User = Depends(get_current_user)):
     try:
-        if borrar_pelicula(id, current_user):
+        if borrar_pelicula(movie.id, current_user):
             return {"status": "success", "message": "Movie deleted"}
         else:
             raise HTTPException(status_code=400, detail="Error deleting movie")
