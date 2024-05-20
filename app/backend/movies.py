@@ -318,6 +318,11 @@ def update_movie_db(id: str, movie: Movie, username: str):
     #crear conexión a la base de datos
     conn, cursor = badabaseConn()
 
+    try:
+        movie.id = None
+    except:
+        pass
+
     # obtener datos del usuario
     try:
         user = obtener_usuario_por_username(username)
