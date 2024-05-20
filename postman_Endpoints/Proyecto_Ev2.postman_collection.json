@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Esteban\",\r\n    \"email\": \"estvini26@gmail.com\",\r\n    \"password\": \"MiPass01\"\r\n}",
+							"raw": "{\r\n    \"username\": \"Esteban01\",\r\n    \"email\": \"estvini26@gmail.com\",\r\n    \"password\": \"MiPass01\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -43,7 +43,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Esteban02\",\r\n    \"email\": \"elmollete26@gmail.com\",\r\n    \"password\": \"MiPass01\"\r\n}",
+							"raw": "{\r\n    \"username\": \"Esteban\",\r\n    \"email\": \"elmollete26@gmail.com\",\r\n    \"password\": \"MiPass01\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -905,6 +905,40 @@
 					"response": []
 				},
 				{
+					"name": "Actualizar Película",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Star Wars: The Bad Batch\",\r\n    \"release\": \"2021–2024\",\r\n    \"type\": \"tvSeries\",\r\n    \"genre\": \"Accion\",\r\n    \"imageurl\": \"https://m.media-amazon.com/images/M/MV5BZWU5Mjg5ZDctOWZmMi00ZjQ4LTkzYzYtY2FkY2E4YWIxMGNkXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/movies/update/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"movies",
+								"update",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Eliminar Película",
 					"request": {
 						"method": "DELETE",
@@ -965,7 +999,7 @@
 	"variable": [
 		{
 			"key": "host",
-			"value": "192.168.100.221:80",
+			"value": "",
 			"type": "string"
 		},
 		{

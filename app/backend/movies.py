@@ -314,7 +314,7 @@ def search_movie_by_title_DB(title: str, username: str):
     finally:
         conn.close()
 
-def update_movie(movie: Movie, username: str):
+def update_movie_db(id: str, movie: Movie, username: str):
     #crear conexión a la base de datos
     conn, cursor = badabaseConn()
 
@@ -324,20 +324,47 @@ def update_movie(movie: Movie, username: str):
     except:
         return False
     
+    # validar que la película exista en la base de datos y que el usuario tenga permisos para actualizarla
+    try:
+        cursor.execute("SELECT * FROM movies WHERE id = %s AND (user1 = %s OR user2 = %s)", (id, user.username, user.username))
+        existing_movie = cursor.fetchone()
+        if not existing_movie:
+            print("La película no existe en la base de datos o no tienes permisos para actualizarla.")
+            return False
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        return False
+    
     # ejecutar la consulta SQL para actualizar la película
     try:
-        cursor.execute("UPDATE movies SET title = %s, release = %s, type = %s, genre = %s, imageurl = %s WHERE id = %s AND (user1 = %s OR user2 = %s)", (movie.title, movie.release, movie.type, movie.genre, movie.imageurl, movie.id, user.username, user.username))
+        # buscar los datos del modelo que no sean None
+        for data in movie.dict().items():
+            if data[1] is not None:
+                cursor.execute(f"UPDATE movies SET {data[0]} = %s WHERE id = %s", (data[1], id))
         conn.commit()
         return True
+
+
     except Exception as e:
         print(f"Error: {str(e)}")
         return False
     finally:
         conn.close()
 
-def borrar_pelicula(id):
+def borrar_pelicula(id: str, user: str):
     #crear conexión a la base de datos
     conn, cursor = badabaseConn()
+
+    # validar que la película exista en la base de datos y que el usuario tenga permisos para eliminarla
+    try:
+        cursor.execute("SELECT * FROM movies WHERE id = %s AND (user1 = %s OR user2 = %s)", (id, user.username, user.username))
+        existing_movie = cursor.fetchone()
+        if not existing_movie:
+            print("La película no existe en la base de datos o no tienes permisos para actualizarla.")
+            return False
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        return False
 
     try:
         #eliminar datos de la base de datos
