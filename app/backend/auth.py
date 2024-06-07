@@ -37,3 +37,8 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
     except JWTError:
         raise credentials_exception
     return token_data
+
+def get_current_active_user(current_user: TokenData = Depends(get_current_user)):
+    if current_user is None:
+        raise HTTPException(status_code=400, detail="Inactive user")
+    return current_user
