@@ -423,3 +423,24 @@ def get_random_movie_by_type(type: str, username: str):
         return False
     finally:
         conn.close()
+
+def get_movie_by_genre_and_type(genre: str, type: str, username: str):
+    #crear conexión a la base de datos
+    conn, cursor = badabaseConn()
+
+    # obtener datos del usuario
+    try:
+        user = obtener_usuario_por_username(username)
+    except:
+        return False
+    
+    # ejecutar la consulta SQL para obtener la película por género y tipo
+    try:
+        cursor.execute("SELECT * FROM movies WHERE genre = %s AND type = %s AND (user1 = %s OR user2 = %s)", (genre, type, user.username, user.username))
+        movies = cursor.fetchall()
+        return [Movie(id=movie[0], title=movie[1], release=movie[2], type=movie[3],genre=movie[4], imageurl=movie[5]) for movie in movies]
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        return False
+    finally:
+        conn.close()
