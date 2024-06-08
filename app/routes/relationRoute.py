@@ -50,16 +50,16 @@ def delete_relation(relation: Relation, current_user: User = Depends(get_current
     except:
         raise HTTPException(status_code=400, detail="Error deleting relation")
     
-@routerRelation.put("/update_relation/")
-def update_relation(relation: Relation, current_user: User = Depends(get_current_user)):
-    try:
-        relation.user1 = current_user.username
-        if borrar_relacion(relation):
-            if crear_relacion(relation):
-                return {"status": "success", "message": "Relation updated"}
-            else:
-                raise HTTPException(status_code=400, detail="Error updating relation")
-        else:
-            raise HTTPException(status_code=400, detail="Error updating relation")
-    except:
-        raise HTTPException(status_code=400, detail="Error updating relation")
+# @routerRelation.put("/update_relation/")
+# def update_relation(relation: Relation, current_user: User = Depends(get_current_user)):
+#     try:
+#         relation.user1 = current_user.username
+#         if borrar_relacion(relation):
+#             if crear_relacion(relation):
+#                 return {"status": "success", "message": "Relation updated"}
+#             else:
+#                 raise HTTPException(status_code=400, detail="Error updating relation")
+#         else:
+#             raise HTTPException(status_code=400, detail="Error updating relation")
+#     except:
+#         raise HTTPException(status_code=400, detail="Error updating relation")
