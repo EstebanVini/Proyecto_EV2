@@ -65,4 +65,17 @@ def borrar_relacion(relation: Relation):
         return False
     
     
-    
+def obtener_relaciones():
+    # crear una conexión a la base de datos
+    conn, cursor = badabaseConn()
+
+    # ejecutar la consulta SQL para obtener todas las relaciones
+    try:
+        cursor.execute('SELECT * FROM users WHERE relatedto is not null')
+        relaciones = cursor.fetchall()
+        # si se encontraron relaciones, retornarlas
+        # cerrar la conexión a la base de datos
+        conn.close()
+        return [Relation(user1=relacion[1], user2=relacion[5]) for relacion in relaciones]
+    except:
+        return False
