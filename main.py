@@ -1,5 +1,3 @@
-
-
 from fastapi import FastAPI
 from app.routes.authRoute import routerAuth
 from app.routes.relationRoute import routerRelation
@@ -12,7 +10,3 @@ app.include_router(routerAuth)
 app.include_router(routerRelation)
 app.include_router(routerMessage)
 app.include_router(routerMovie)
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=80)
