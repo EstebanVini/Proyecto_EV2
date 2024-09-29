@@ -1,24 +1,30 @@
-CREATE TABLE "users" (
-	"id"	INTEGER,
-	"username"	TEXT,
-	"email"	TEXT,
-	"password"	TEXT,
-	"salt"	TEXT,
-	"relatedto"	TEXT,
-	"admin"	BOOLEAN,
-	PRIMARY KEY("id")
+CREATE TABLE movies (
+    id SERIAL PRIMARY KEY,
+    title TEXT,
+    release DATE, -- Cambiar a DATE si es una fecha válida
+    type TEXT,
+    genre TEXT,
+    imageurl TEXT,
+    user1 TEXT,
+    user2 TEXT
 );
 
-
-CREATE TABLE "messages" (
-	"id"	INTEGER NOT NULL UNIQUE,
-	"userID"	INTEGER,
-	"sender"	TEXT,
-	"receiver"	TEXT,
-	"message"	TEXT,
-	"date"	TEXT,
-	PRIMARY KEY("id" AUTOINCREMENT),
-	FOREIGN KEY("userID") REFERENCES "users"
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,  -- Cambiado a SERIAL para autoincrementar
+    username TEXT,
+    email TEXT,
+    password TEXT,
+    salt TEXT,
+    relatedto TEXT,
+    admin BOOLEAN
 );
 
-INSERT INTO "messages" ("userID", "sender", "receiver", "message", "date") VALUES (2, "Esteban02", "Esteban", "Hello, how are you?", "2022-01-01");
+CREATE TABLE messages (
+    id SERIAL PRIMARY KEY,  -- SERIAL reemplaza AUTOINCREMENT
+    userID INTEGER,
+    sender TEXT,
+    receiver TEXT,
+    message TEXT,
+    date TIMESTAMP,  -- Cambiado a TIMESTAMP si quieres almacenar fecha y hora
+    FOREIGN KEY (userID) REFERENCES users(id)  -- Ajustada la clave foránea para referenciar el campo id de la tabla users
+);

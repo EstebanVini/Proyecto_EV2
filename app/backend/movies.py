@@ -2,7 +2,7 @@ import requests
 import os
 from dotenv import load_dotenv
 from app.models.models import Movie, User, UserInDB
-from app.database.databaseConn import badabaseConn 
+from app.database.databaseConn import databaseConn 
 from app.backend.users import obtener_usuario_por_username
 from googletrans import Translator
 
@@ -54,7 +54,7 @@ def search_movieDB(title):
 
 def guardar_pelicula(movie: Movie, username: str):
     # Crear conexión a la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # Obtener datos del usuario que está guardando la película
     try:
@@ -84,7 +84,7 @@ def guardar_pelicula(movie: Movie, username: str):
 
 def get_all_movies(username: str):
     #crear conexión a la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # obtener datos del usuario
     try:
@@ -105,7 +105,7 @@ def get_all_movies(username: str):
 
 def get_tvseries(username: str):
     #crear conexión a la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # obtener datos del usuario
     try:
@@ -127,7 +127,7 @@ def get_tvseries(username: str):
 
 def get_movies(username: str):
     #crear conexión a la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # obtener datos del usuario
     try:
@@ -148,7 +148,7 @@ def get_movies(username: str):
 
 def get_movie_by_id(id, username: str):
     #crear conexión a la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # obtener datos del usuario
     try:
@@ -169,7 +169,7 @@ def get_movie_by_id(id, username: str):
 
 def get_movie_by_genre(genre: str, username: str):
     #crear conexión a la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # obtener datos del usuario
     try:
@@ -190,7 +190,7 @@ def get_movie_by_genre(genre: str, username: str):
 
 def get_random_movie(username: str):
     #crear conexión a la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # obtener datos del usuario
     try:
@@ -211,7 +211,7 @@ def get_random_movie(username: str):
 
 def get_random_movie_by_genre(genre: str, username: str):
     #crear conexión a la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # obtener datos del usuario
     try:
@@ -232,7 +232,7 @@ def get_random_movie_by_genre(genre: str, username: str):
 
 def get_random_tvseries(username: str):
     #crear conexión a la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # obtener datos del usuario
     try:
@@ -253,7 +253,7 @@ def get_random_tvseries(username: str):
 
 def get_random_movie(username: str):
     #crear conexión a la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # obtener datos del usuario
     try:
@@ -274,7 +274,7 @@ def get_random_movie(username: str):
 
 def get_random_movie_by_genre_and_type(movie: Movie, username: str):
     #crear conexión a la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # obtener datos del usuario
     try:
@@ -295,7 +295,7 @@ def get_random_movie_by_genre_and_type(movie: Movie, username: str):
 
 def search_movie_by_title_DB(title: str, username: str):
     #crear conexión a la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # obtener datos del usuario
     try:
@@ -316,7 +316,7 @@ def search_movie_by_title_DB(title: str, username: str):
 
 def update_movie_db(id: str, movie: Movie, username: str):
     #crear conexión a la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     try:
         movie.id = None
@@ -358,7 +358,7 @@ def update_movie_db(id: str, movie: Movie, username: str):
 
 def borrar_pelicula(id: str, user: str):
     #crear conexión a la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # validar que la película exista en la base de datos y que el usuario tenga permisos para eliminarla
     try:
@@ -384,7 +384,7 @@ def borrar_pelicula(id: str, user: str):
 
 def get_movie_by_type(type: str, username: str):
     #crear conexión a la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # obtener datos del usuario
     try:
@@ -405,7 +405,7 @@ def get_movie_by_type(type: str, username: str):
 
 def get_random_movie_by_type(type: str, username: str):
     #crear conexión a la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # obtener datos del usuario
     try:

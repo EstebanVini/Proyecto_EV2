@@ -1,40 +1,29 @@
-# import sqlite3
-
-# def badabaseConn():
-#     conn = sqlite3.connect('./data/proyectoE.db')
-#     cursor = conn.cursor()
-#     return conn, cursor
-
-import mysql.connector
+import psycopg2
 import os
 from dotenv import load_dotenv
 
 load_dotenv("dev.env")
 
 # Datos de conexión
-host = "192.168.100.33"
+host = "192.168.100.123"
 user = os.getenv("DBUSER")
 password = os.getenv("DBPASSWORD")
-database = "proyectoEv2"
+database = "ProyectoEV2"
 
 
-def badabaseConn():
+def databaseConn():
     # Intenta establecer la conexión
     try:
-        connection = mysql.connector.connect(
+        connection = psycopg2.connect(
             host=host,
             user=user,
             password=password,
-            database=database,
-            charset='utf8mb4',  # Configura el conjunto de caracteres
-            collation='utf8mb4_unicode_ci'  # Configura la colación
+            dbname=database,
+            #options="-c search_path=public"  # Opcionalmente puedes configurar el esquema
         )
-        if connection.is_connected():
-            print("Conexión establecida")
-            return connection, connection.cursor()    
+        print("Conexión establecida")
+        return connection, connection.cursor()
 
-    except mysql.connector.Error as err:
+    except psycopg2.Error as err:
         print("Error de conexión: {}".format(err))
-        return None  
-    
-    return None
+        return None

@@ -1,11 +1,11 @@
-from app.database.databaseConn import badabaseConn
+from app.database.databaseConn import databaseConn
 from app.models.models import Relation
 from app.backend.users import obtener_usuario_por_username
 from fastapi import HTTPException
 
 def crear_relacion(relation: Relation):
     # crear una conexión a la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # revisar si el usuario 2 existe
     try:
@@ -37,7 +37,7 @@ def crear_relacion(relation: Relation):
     
 def obtener_relaciones_por_username(username: str):
     # crear una conexión a la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # ejecutar la consulta SQL para obtener las relaciones por username
     try:
@@ -52,7 +52,7 @@ def obtener_relaciones_por_username(username: str):
     
 def borrar_relacion(relation: Relation):
     # crear una conexión a la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # ejecutar la consulta SQL para borrar la relación
     try:

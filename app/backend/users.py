@@ -1,10 +1,10 @@
 import bcrypt
-from app.database.databaseConn import badabaseConn
+from app.database.databaseConn import databaseConn
 from app.models.models import User, UserInDB, NewPassword
 
 def obtener_usuario_por_username(username: str):
     # crear una conexión a la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # ejecutar la consulta SQL para obtener el usuario por username
     try:
@@ -52,7 +52,7 @@ def register_userDB(user: UserInDB):
     hashed_pwd, salt = hash_password(user.password)
 
     # crear una conexión a la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # consultar si el usuario ya existe
     try:
@@ -65,7 +65,7 @@ def register_userDB(user: UserInDB):
     # insertar un usuario en la tabla con un ID automático
     try:
         # insertar un usuario en la tabla con un ID automático
-        cursor.execute('INSERT INTO users (username, email, password, salt, admin) VALUES (%s, %s, %s, %s, %s)', (user.username, user.email, hashed_pwd, salt, 0))
+        cursor.execute('INSERT INTO users (username, email, password, salt, admin) VALUES (%s, %s, %s, %s, %s)', (user.username, user.email, hashed_pwd, salt, False))
     except Exception as e:
         print(e)
         return False
@@ -78,7 +78,7 @@ def register_userDB(user: UserInDB):
 
 def chage_password_userDB(newPwd: NewPassword, user: UserInDB):
     # crear una conexión a la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # Consultar si el usuario ya existe y validar las credenciales
     try:
