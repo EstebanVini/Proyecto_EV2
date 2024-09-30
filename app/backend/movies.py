@@ -32,7 +32,7 @@ def translate_to_english(text):
     return text
   
 def search_movieDB(title):
-    load_dotenv("/home/ProyectoEV2/dev.env")
+    load_dotenv("dev.env")
     apikey = os.getenv("MOVIESAPIKEY")
     
     url = "https://imdb146.p.rapidapi.com/v1/find/"

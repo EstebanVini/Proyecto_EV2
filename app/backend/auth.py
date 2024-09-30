@@ -6,7 +6,7 @@ from fastapi import HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from app.models.models import TokenData
 
-load_dotenv("/home/ProyectoEV2/dev.env")
+load_dotenv("dev.env")
 
 # Configuraciones de autenticación
 SECRET_KEY = os.getenv("SECRET_KEY")

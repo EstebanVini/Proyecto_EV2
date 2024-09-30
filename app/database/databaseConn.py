@@ -2,7 +2,7 @@ import psycopg2
 import os
 from dotenv import load_dotenv
 
-load_dotenv("/home/ProyectoEV2/dev.env")
+load_dotenv("dev.env")
 
 # Datos de conexión
 host = "192.168.100.123"
