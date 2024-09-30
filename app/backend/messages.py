@@ -1,13 +1,12 @@
 import datetime
 import pytz
-import mysql.connector
-from app.database.databaseConn import badabaseConn
+from app.database.databaseConn import databaseConn
 from app.backend.users import obtener_usuario_por_username
 from app.models.models import Relation, Message, User, MessageInDB
 
 
 def enviar_mensaje(message: Message, current_user):
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # obtener los datos del usuario actual
     usuario = obtener_usuario_por_username(current_user.username)
@@ -27,7 +26,7 @@ def enviar_mensaje(message: Message, current_user):
     
 def obtener_mensajes_por_username(username: str):
     # crear la conexion con la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # ejecutar la consulta SQL para obtener los mensajes por username
     try:
@@ -42,7 +41,7 @@ def obtener_mensajes_por_username(username: str):
     
 def obtener_mensajes_recibidos(username: str):
     # crear la conexion con la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # ejecutar la consulta SQL para obtener los mensajes por username
     try:
@@ -57,7 +56,7 @@ def obtener_mensajes_recibidos(username: str):
     
 def obtener_mensajes_por_ID(userID: int):
     # crear la conexion con la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # ejecutar la consulta SQL para obtener los mensajes por username
     try:
@@ -72,7 +71,7 @@ def obtener_mensajes_por_ID(userID: int):
 
 def obtener_mensaje_recibido_aleatorio(username: str):
     # crear la conexion con la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # ejecutar la consulta SQL para obtener los mensajes por username
     try:
@@ -88,7 +87,7 @@ def obtener_mensaje_recibido_aleatorio(username: str):
 
 def borrar_mensaje(id: int):
     # crear la conexion con la base de datos
-    conn, cursor = badabaseConn()
+    conn, cursor = databaseConn()
 
     # ejecutar la consulta SQL para borrar el mensaje
     try:
