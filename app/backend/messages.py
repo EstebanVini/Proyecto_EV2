@@ -76,7 +76,7 @@ def obtener_mensaje_recibido_aleatorio(username: str):
 
     # ejecutar la consulta SQL para obtener los mensajes por username
     try:
-        cursor.execute('SELECT * FROM messages WHERE receiver = %s ORDER BY RAND() LIMIT 1', (username,))
+        cursor.execute('SELECT * FROM messages WHERE receiver = %s ORDER BY RANDOM() LIMIT 1', (username,))
         mensaje = cursor.fetchone()
         # si se encontraron mensajes, retornarlos
         # cerrar la conexion con la base de datos

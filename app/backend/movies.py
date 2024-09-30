@@ -200,7 +200,7 @@ def get_random_movie(username: str):
     
     # ejecutar la consulta SQL para obtener una película aleatoria
     try:
-        cursor.execute("SELECT * FROM movies WHERE user1 = %s OR user2 = %s ORDER BY RAND() LIMIT 1", (user.username, user.username))
+        cursor.execute("SELECT * FROM movies WHERE user1 = %s OR user2 = %s ORDER BY RANDOM() LIMIT 1", (user.username, user.username))
         movie = cursor.fetchone()
         return Movie(id=movie[0], title=movie[1], release=movie[2], type=movie[3],genre=movie[4], imageurl=movie[5])
     except Exception as e:
@@ -221,7 +221,7 @@ def get_random_movie_by_genre(genre: str, username: str):
     
     # ejecutar la consulta SQL para obtener una película aleatoria por género
     try:
-        cursor.execute("SELECT * FROM movies WHERE genre = %s AND (user1 = %s OR user2 = %s) ORDER BY RAND() LIMIT 1", (genre, user.username, user.username))
+        cursor.execute("SELECT * FROM movies WHERE genre = %s AND (user1 = %s OR user2 = %s) ORDER BY RANDOM() LIMIT 1", (genre, user.username, user.username))
         movie = cursor.fetchone()
         return Movie(id=movie[0], title=movie[1], release=movie[2], type=movie[3],genre=movie[4], imageurl=movie[5])
     except Exception as e:
@@ -242,7 +242,7 @@ def get_random_tvseries(username: str):
     
     # ejecutar la consulta SQL para obtener una serie de televisión aleatoria
     try:
-        cursor.execute("SELECT * FROM movies WHERE user1 = %s OR user2 = %s AND type = 'tvSeries' ORDER BY RAND() LIMIT 1", (user.username, user.username))
+        cursor.execute("SELECT * FROM movies WHERE user1 = %s OR user2 = %s AND type = 'tvSeries' ORDER BY RANDOM() LIMIT 1", (user.username, user.username))
         tvserie = cursor.fetchone()
         return Movie(id=tvserie[0], title=tvserie[1], release=tvserie[2], type=tvserie[3],genre=tvserie[4], imageurl=tvserie[5])
     except Exception as e:
@@ -263,7 +263,7 @@ def get_random_movie(username: str):
     
     # ejecutar la consulta SQL para obtener una película aleatoria
     try:
-        cursor.execute("SELECT * FROM movies WHERE user1 = %s OR user2 = %s AND type = 'movie' ORDER BY RAND() LIMIT 1", (user.username, user.username))
+        cursor.execute("SELECT * FROM movies WHERE user1 = %s OR user2 = %s AND type = 'movie' ORDER BY RANDOM() LIMIT 1", (user.username, user.username))
         movie = cursor.fetchone()
         return Movie(id=movie[0], title=movie[1], release=movie[2], type=movie[3],genre=movie[4], imageurl=movie[5])
     except Exception as e:
@@ -284,7 +284,7 @@ def get_random_movie_by_genre_and_type(movie: Movie, username: str):
     
     # ejecutar la consulta SQL para obtener una película aleatoria por género y tipo
     try:
-        cursor.execute("SELECT * FROM movies WHERE genre = %s AND type = %s AND (user1 = %s OR user2 = %s) ORDER BY RAND() LIMIT 1", (movie.genre, movie.type, user.username, user.username))
+        cursor.execute("SELECT * FROM movies WHERE genre = %s AND type = %s AND (user1 = %s OR user2 = %s) ORDER BY RANDOM() LIMIT 1", (movie.genre, movie.type, user.username, user.username))
         movie = cursor.fetchone()
         return Movie(id=movie[0], title=movie[1], release=movie[2], type=movie[3],genre=movie[4], imageurl=movie[5])
     except Exception as e:
@@ -415,7 +415,7 @@ def get_random_movie_by_type(type: str, username: str):
     
     # ejecutar la consulta SQL para obtener una película aleatoria por tipo
     try:
-        cursor.execute("SELECT * FROM movies WHERE type = %s AND (user1 = %s OR user2 = %s) ORDER BY RAND() LIMIT 1", (type, user.username, user.username))
+        cursor.execute("SELECT * FROM movies WHERE type = %s AND (user1 = %s OR user2 = %s) ORDER BY RANDOM() LIMIT 1", (type, user.username, user.username))
         movie = cursor.fetchone()
         return Movie(id=movie[0], title=movie[1], release=movie[2], type=movie[3],genre=movie[4], imageurl=movie[5])
     except Exception as e:
