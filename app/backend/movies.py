@@ -27,8 +27,6 @@ def translate_to_english(text):
     return translation
   # If the language is English, return the text as-is
   else:
-    
-    print("Texto en inglés")
     return text
   
 def search_movieDB(title):
@@ -37,9 +35,9 @@ def search_movieDB(title):
     
     url = "https://imdb146.p.rapidapi.com/v1/find/"
 
-    translatedTitle = translate_to_english(title)
+    #translatedTitle = translate_to_english(title)
 
-    querystring = {"query": translatedTitle}
+    querystring = {"query": title}
 
     headers = {
         "X-RapidAPI-Key": apikey,
