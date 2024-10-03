@@ -19,8 +19,9 @@ app.add_middleware(
     allow_headers=["*"],  
 )
 
-app.mount("/", StaticFiles(directory="app/frontend/web", html=True), name="static")
-@app.get("/")
+app.mount("/static", StaticFiles(directory="app/frontend/web", html=True), name="static")
+
+@app.get("/web")
 def serve_frontend():
     file_path = os.path.join("app/frontend/web", "index.html")
     return FileResponse(file_path)
