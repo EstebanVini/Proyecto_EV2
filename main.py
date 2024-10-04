@@ -9,12 +9,6 @@ from app.routes.messageRoute import routerMessage
 from app.routes.moviesRoute import routerMovie
 
 app = FastAPI()
-app.mount("/static", StaticFiles(directory="app/frontend/web", html=True), name="static")
-
-@app.get("/web")
-def serve_frontend():
-    file_path = os.path.join("app/frontend/web", "index.html")
-    return FileResponse(file_path)
 
 app.include_router(routerAuth)
 app.include_router(routerRelation)
