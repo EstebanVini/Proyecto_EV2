@@ -9,17 +9,7 @@ from app.routes.messageRoute import routerMessage
 from app.routes.moviesRoute import routerMovie
 
 app = FastAPI()
-
-# Configurar CORS
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["https://proyectoe.eviniegra.software"], 
-    allow_credentials=True,
-    allow_methods=["*"],  
-    allow_headers=["*"],  
-)
-
-app.mount("/static", StaticFiles(directory="app/frontend/web", html=True), name="static")
+app.mount("/", StaticFiles(directory="app/frontend/web", html=True), name="static")
 
 @app.get("/web")
 def serve_frontend():
